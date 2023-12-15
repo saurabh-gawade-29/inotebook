@@ -2,9 +2,9 @@ import { useState } from "react";
 import NoteContext from "./NoteContext";
 import {
   serviceCallDelete,
-  serviceCallFetchGet,
   serviceCallGet,
   serviceCallPost,
+  serviceCallPut,
 } from "../../Helper/Service";
 
 const NoteState = (props) => {
@@ -23,14 +23,14 @@ const NoteState = (props) => {
   const [data, setData] = useState(about);
   const [notes, setNotes] = useState(notesinit);
 
-  //? Add Note
+  //? get Note
   const getNotes = async () => {
     //! Define the headers for the request
     const url = `api/notes/fetchallnotes`;
     const headers = {
       "Content-Type": "application/json",
       "auth-token":
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjU3YzQyOWUzN2E4YjAzOGJhZTkwNmE2In0sImlhdCI6MTcwMjY0NDMxM30.DzfrBH6MgKHBlvI9KStqJvYS3VXKSRRggBNf8S8NKQQ",
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjU3YzQyOWUzN2E4YjAzOGJhZTkwNmE2In0sImlhdCI6MTcwMjY1ODA1OX0.kuYkK4hFBbQe4EDjXG5BRrEmHXLEZRC04zE-Hdj757U",
     };
     const res = await serviceCallGet(url, headers);
     console.log(res, "Res from getNotes");
@@ -42,18 +42,14 @@ const NoteState = (props) => {
     //! Define the headers for the request
     const headers = {
       "Content-Type": "application/json",
-      "auth-token": "",
+      "auth-token":
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjU3YzQyOWUzN2E4YjAzOGJhZTkwNmE2In0sImlhdCI6MTcwMjY1ODA1OX0.kuYkK4hFBbQe4EDjXG5BRrEmHXLEZRC04zE-Hdj757U",
     };
     const url = `api/notes/addnote`;
     const postData = { title, description, tag };
     const res = await serviceCallPost(url, postData, headers);
     console.log(res, "Add Note Res");
-    const addnote = {
-      _id: "7",
-      title: title,
-      description: description,
-      tag: tag,
-    };
+    const addnote = res.data;
     //! We use concat => It's return new Array
     setNotes(notes.concat(addnote));
   };
@@ -67,7 +63,7 @@ const NoteState = (props) => {
     const headers = {
       "Content-Type": "application/json",
       "auth-token":
-        "yJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjU3YzQyOWUzN2E4YjAzOGJhZTkwNmE2In0sImlhdCI6MTcwMjY0NDMxM30.DzfrBH6MgKHBlvI9KStqJvYS3VXKSRRggBNf8S8NKQQ",
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjU3YzQyOWUzN2E4YjAzOGJhZTkwNmE2In0sImlhdCI6MTcwMjY1ODA1OX0.kuYkK4hFBbQe4EDjXG5BRrEmHXLEZRC04zE-Hdj757U",
     };
     const res = await serviceCallDelete(url, headers);
     console.log(res, "Res from deleteNotes");
@@ -85,20 +81,28 @@ const NoteState = (props) => {
     //! Define the headers for the request
     const headers = {
       "Content-Type": "application/json",
-      "auth-token": "",
+      "auth-token":
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjU3YzQyOWUzN2E4YjAzOGJhZTkwNmE2In0sImlhdCI6MTcwMjY1ODA1OX0.kuYkK4hFBbQe4EDjXG5BRrEmHXLEZRC04zE-Hdj757U",
     };
     const postData = { title, description, tag };
     const url = `api/notes/updatenote/${id}`;
-    const res = await serviceCallPost(url, postData, headers);
+    const res = await serviceCallPut(url, postData, headers);
     console.log(res, "Update res notes");
-    for (let i = 0; i < notes.length; i++) {
-      const element = notes[i];
+
+    //TODO: above code only change in backend but not updating in frontend
+
+    //* Make Deep Copy of notes
+    let newNotes = JSON.parse(JSON.stringify(notes));
+    for (let i = 0; i < newNotes.length; i++) {
+      const element = newNotes[i];
       if (element._id === id) {
-        element.title = title;
-        element.description = description;
-        element.tag = tag;
+        newNotes[i].title = title;
+        newNotes[i].description = description;
+        newNotes[i].tag = tag;
+        break;
       }
     }
+    setNotes(newNotes);
   };
 
   const update = () => {

@@ -14,7 +14,7 @@ const About = () => {
   });
   return (
     <div className="">
-      <div className="card">
+      <div className="card shadow">
         <div className="card-body">
           <h5 className="card-title">{name}</h5>
           <h6 className="card-subtitle mb-2 text-body-secondary">{title}</h6>

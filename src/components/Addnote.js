@@ -21,6 +21,7 @@ const Addnote = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     addNote(note.title, note.description, note.tag);
+    setNote(initstate);
   };
 
   return (
@@ -29,7 +30,7 @@ const Addnote = () => {
         <h3>Notes</h3>
         <button
           type="button"
-          className="btn btn-dark"
+          className="btn btn-danger"
           data-bs-toggle="modal"
           data-bs-target="#exampleModal"
         >
@@ -42,11 +43,11 @@ const Addnote = () => {
           aria-labelledby="exampleModalLabel"
           aria-hidden="true"
         >
-          <div className="modal-dialog">
+          <div className="modal-dialog modal-dialog-centered modal-dialog-scrollable">
             <div className="modal-content">
               <div className="modal-header">
                 <h1 className="modal-title fs-5" id="exampleModalLabel">
-                  Fill The Details
+                  Add The Details
                 </h1>
                 <button
                   type="button"
@@ -64,12 +65,16 @@ const Addnote = () => {
                     Title
                   </label>
                   <input
+                    value={note.title}
                     name="title"
                     onChange={onChange}
                     type="text"
                     className="form-control"
                     id="exampleFormControlInput1"
                   />
+                  <div id="emailHelp" className="form-text">
+                    Min Length Should be 3
+                  </div>
                 </div>
                 <div className="mb-3">
                   <label
@@ -79,12 +84,16 @@ const Addnote = () => {
                     Desciption
                   </label>
                   <textarea
+                    value={note.description}
                     name="description"
                     onChange={onChange}
                     className="form-control"
                     id="exampleFormControlTextarea1"
                     rows="3"
                   ></textarea>
+                  <div id="emailHelp" className="form-text">
+                    Min Length Should be 5
+                  </div>
                 </div>
                 <div className="mb-3">
                   <label
@@ -94,6 +103,7 @@ const Addnote = () => {
                     Tag
                   </label>
                   <input
+                    value={note.tag}
                     name="tag"
                     onChange={onChange}
                     type="text"
@@ -111,11 +121,14 @@ const Addnote = () => {
                   Close
                 </button>
                 <button
+                  disabled={
+                    note.title.length < 3 || note.description.length < 5
+                  }
                   type="button"
-                  className="btn btn-dark"
+                  className="btn btn-danger"
                   onClick={handleSubmit}
                 >
-                  Save changes
+                  Save Note
                 </button>
               </div>
             </div>

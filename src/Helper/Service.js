@@ -1,12 +1,17 @@
 import axios from "axios";
 import { trackPromise } from "react-promise-tracker";
 
+//TODO: Change this host as per your needs
 const host = "http://localhost:5000/";
+
+//? POST
 export async function serviceCallPost(url, postData, headers) {
+  debugger;
   // TODO: Global Function Pending
   try {
+    //! Need to pass headers in object
     const response = await trackPromise(
-      axios.post(`${host}${url}`, postData, headers)
+      axios.post(`${host}${url}`, postData, { headers })
     );
     return response;
   } catch (error) {
@@ -14,6 +19,22 @@ export async function serviceCallPost(url, postData, headers) {
   }
 }
 
+//? PUT
+export async function serviceCallPut(url, postData, headers) {
+  debugger;
+  // TODO: Global Function Pending
+  try {
+    //! Need to pass headers in object
+    const response = await trackPromise(
+      axios.put(`${host}${url}`, postData, { headers })
+    );
+    return response;
+  } catch (error) {
+    console.log(error, "ServiceCall Catch Block");
+  }
+}
+
+//? GET
 export async function serviceCallGet(url, headers) {
   debugger;
   try {
@@ -28,6 +49,7 @@ export async function serviceCallGet(url, headers) {
   }
 }
 
+//? DELETE
 export async function serviceCallDelete(url, headers) {
   debugger;
   try {
@@ -45,6 +67,7 @@ export async function serviceCallDelete(url, headers) {
 export async function serviceCallFetchGet(url) {
   try {
     const response = await trackPromise(
+      //! See here header are in another this bracket {}
       await fetch(`${host}${url}`, {
         method: "GET",
         headers: {
