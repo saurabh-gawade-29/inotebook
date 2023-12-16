@@ -72,8 +72,7 @@ export async function serviceCallFetchGet(url) {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
-          "auth-token":
-            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjU3YzQyOWUzN2E4YjAzOGJhZTkwNmE2In0sImlhdCI6MTcwMjY0NDMxM30.DzfrBH6MgKHBlvI9KStqJvYS3VXKSRRggBNf8S8NKQQ",
+          "auth-token": localStorage.getItem("token"),
         },
       })
     );

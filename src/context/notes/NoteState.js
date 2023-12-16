@@ -29,8 +29,7 @@ const NoteState = (props) => {
     const url = `api/notes/fetchallnotes`;
     const headers = {
       "Content-Type": "application/json",
-      "auth-token":
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjU3YzQyOWUzN2E4YjAzOGJhZTkwNmE2In0sImlhdCI6MTcwMjY1ODA1OX0.kuYkK4hFBbQe4EDjXG5BRrEmHXLEZRC04zE-Hdj757U",
+      "auth-token": localStorage.getItem("token"),
     };
     const res = await serviceCallGet(url, headers);
     console.log(res, "Res from getNotes");
@@ -42,8 +41,7 @@ const NoteState = (props) => {
     //! Define the headers for the request
     const headers = {
       "Content-Type": "application/json",
-      "auth-token":
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjU3YzQyOWUzN2E4YjAzOGJhZTkwNmE2In0sImlhdCI6MTcwMjY1ODA1OX0.kuYkK4hFBbQe4EDjXG5BRrEmHXLEZRC04zE-Hdj757U",
+      "auth-token": localStorage.getItem("token"),
     };
     const url = `api/notes/addnote`;
     const postData = { title, description, tag };
@@ -62,8 +60,7 @@ const NoteState = (props) => {
     console.log("Deleting node with Id", id);
     const headers = {
       "Content-Type": "application/json",
-      "auth-token":
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjU3YzQyOWUzN2E4YjAzOGJhZTkwNmE2In0sImlhdCI6MTcwMjY1ODA1OX0.kuYkK4hFBbQe4EDjXG5BRrEmHXLEZRC04zE-Hdj757U",
+      "auth-token": localStorage.getItem("token"),
     };
     const res = await serviceCallDelete(url, headers);
     console.log(res, "Res from deleteNotes");
@@ -81,8 +78,7 @@ const NoteState = (props) => {
     //! Define the headers for the request
     const headers = {
       "Content-Type": "application/json",
-      "auth-token":
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjU3YzQyOWUzN2E4YjAzOGJhZTkwNmE2In0sImlhdCI6MTcwMjY1ODA1OX0.kuYkK4hFBbQe4EDjXG5BRrEmHXLEZRC04zE-Hdj757U",
+      "auth-token": localStorage.getItem("token"),
     };
     const postData = { title, description, tag };
     const url = `api/notes/updatenote/${id}`;

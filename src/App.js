@@ -4,7 +4,6 @@ import About from "./components/About";
 import Home from "./components/Home";
 import Navbar from "./components/Navbar";
 import NoteState from "./context/notes/NoteState";
-import Alert from "./components/Alert";
 import GLoader from "./components/GLoader";
 import Login from "./components/Login";
 import Signup from "./components/Signup";
@@ -14,7 +13,6 @@ function App() {
     <>
       <NoteState>
         <Navbar />
-        <Alert />
         <div className="container my-2">
           <Routes>
             <Route path="/" element={<Home />} />

@@ -2,20 +2,26 @@ import React, { useContext, useEffect, useRef, useState } from "react";
 import Noteitem from "./Noteitem";
 import NoteContext from "../context/notes/NoteContext";
 import Addnote from "./Addnote";
+import { useNavigate } from "react-router-dom";
 
 const Home = () => {
   const noteContext = useContext(NoteContext);
   const { notes, getNotes, editNote } = noteContext;
-
+  let navigate = useNavigate();
   //! Fetch All Notes
   useEffect(() => {
-    getNotes();
+    if (localStorage.getItem("token")) {
+      getNotes();
+    } else {
+      navigate("/login");
+    }
     // eslint-disable-next-line
   }, []);
 
   //! Open And Close Modal
   const modalRef = useRef(null);
   const closeRef = useRef(null);
+
   //! We Can use Context instead of this state
   const [note, setNote] = useState({
     id: "",
