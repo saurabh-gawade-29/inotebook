@@ -21,7 +21,7 @@ const Navbar = () => {
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark shadow">
       <div className="container-fluid">
         <Link to="/" className="navbar-brand">
-          iNotebook
+          CelestialScribe
         </Link>
         <button
           className="navbar-toggler"

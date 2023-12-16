@@ -9,13 +9,13 @@ import {
 
 const NoteState = (props) => {
   const about = {
-    name: "Saurabh Gawade",
-    title: "iNotebook",
-    desc: "Now you can sign up and login and store your notes into cloud",
+    name: "CelestialScribe",
+    title: "Your Cloud Notes",
+    desc: "CelestialScribe can be interpreted as a name that combines elements of the celestial, meaning related to the sky or the heavens, with the concept of a scribe, which traditionally refers to a person who writes or records information. In this context, the name may suggest a tool or platform that allows users to document or write in a way that feels inspired, elevated, or connected to something higher or celestial.",
   };
   const aboutChange = {
-    name: "Saurabh Gawade - This page is using react create Context API",
-    title: "iNotebook - Enjoy the APP",
+    name: "This page is using react create Context API",
+    title: "Enjoy the APP",
     desc: "It's Totally Free to use",
   };
 
