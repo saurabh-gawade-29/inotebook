@@ -1,5 +1,4 @@
 /* Global CSS */
-
 .cursor-pointer {
   cursor: pointer;
 }
@@ -25,4 +24,9 @@
   justify-content: center;
   align-items: center;
   z-index: 9999; /* Set an appropriate z-index to ensure it overlays other content */
+}
+
+/* Navbar Style */
+.log-btn {
+  border-radius: 94% 6% 95% 5% / 7% 95% 7% 94%;
 }

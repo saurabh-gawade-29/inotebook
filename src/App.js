@@ -13,7 +13,7 @@ function App() {
     <>
       <NoteState>
         <Navbar />
-        <div className="container my-2">
+        <div className="container my-4">
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
