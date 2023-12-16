@@ -30,7 +30,7 @@ const Navbar = () => {
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark shadow">
       <div className="container-fluid">
-        <Link to="/" className="navbar-brand">
+        <Link to="/" className="navbar-brand nav-logo">
           CelestialScribe
         </Link>
         <button
@@ -45,12 +45,12 @@ const Navbar = () => {
           <span className="navbar-toggler-icon"></span>
         </button>
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul className="navbar-nav me-auto mb-2 mb-lg-0 ms-4">
+          <ul className="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
             {localStorage.getItem("token") ? (
               <li className="nav-item">
                 <Link
                   to="/"
-                  className={`nav-link 
+                  className={`nav-link fs-5
                 ${location.pathname === "/" ? "active" : ""}`}
                   aria-current="page"
                 >
@@ -63,7 +63,7 @@ const Navbar = () => {
             <li className="nav-item">
               <Link
                 to="/about"
-                className={`nav-link 
+                className={`nav-link fs-5
                 ${location.pathname === "/about" ? "active" : ""}`}
               >
                 About
