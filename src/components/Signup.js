@@ -46,70 +46,74 @@ const Signup = () => {
   return (
     <>
       <div className="row justify-content-center">
-        <div className="col-12 col-sm 12 col-md-5 col-lg-6">
-          <h6 className="display-6">Let's Create Your Account</h6>
-          <form onSubmit={handleSubmit}>
-            <div className="mb-3">
-              <label htmlFor="email" className="form-label">
-                Name
-              </label>
-              <input
-                value={credentials.name}
-                onChange={onChange}
-                id="name"
-                name="name"
-                type="text"
-                className="form-control"
-                aria-describedby="emailHelp"
-              />
+        <div className="col-12 col-sm 12 col-md-10 col-lg-6">
+          <div className="card gBorderRadius p-4 shadow">
+            <div className="card-body">
+              <h6 className="display-6">Let's Create Your Account</h6>
+              <form onSubmit={handleSubmit}>
+                <div className="mb-3">
+                  <label htmlFor="email" className="form-label">
+                    Name
+                  </label>
+                  <input
+                    value={credentials.name}
+                    onChange={onChange}
+                    id="name"
+                    name="name"
+                    type="text"
+                    className="form-control"
+                    aria-describedby="emailHelp"
+                  />
+                </div>
+                <div className="mb-3">
+                  <label htmlFor="email" className="form-label">
+                    Email address
+                  </label>
+                  <input
+                    value={credentials.email}
+                    onChange={onChange}
+                    id="email"
+                    name="email"
+                    type="email"
+                    className="form-control"
+                    aria-describedby="emailHelp"
+                  />
+                  <div id="emailHelp" className="form-text">
+                    We'll never share your email with anyone else.
+                  </div>
+                </div>
+                <div className="mb-3">
+                  <label htmlFor="exampleInputPassword1" className="form-label">
+                    Password
+                  </label>
+                  <input
+                    value={credentials.password}
+                    onChange={onChange}
+                    id="password"
+                    name="password"
+                    type="password"
+                    className="form-control"
+                  />
+                </div>
+                <div className="mb-3">
+                  <label htmlFor="exampleInputPassword1" className="form-label">
+                    Confrim Password
+                  </label>
+                  <input
+                    value={credentials.Cpassword}
+                    onChange={onChange}
+                    id="cpassword"
+                    name="cpassword"
+                    type="password"
+                    className="form-control"
+                  />
+                </div>
+                <button type="submit" className="btn btn-outline-dark">
+                  Sign Up
+                </button>
+              </form>
             </div>
-            <div className="mb-3">
-              <label htmlFor="email" className="form-label">
-                Email address
-              </label>
-              <input
-                value={credentials.email}
-                onChange={onChange}
-                id="email"
-                name="email"
-                type="email"
-                className="form-control"
-                aria-describedby="emailHelp"
-              />
-              <div id="emailHelp" className="form-text">
-                We'll never share your email with anyone else.
-              </div>
-            </div>
-            <div className="mb-3">
-              <label htmlFor="exampleInputPassword1" className="form-label">
-                Password
-              </label>
-              <input
-                value={credentials.password}
-                onChange={onChange}
-                id="password"
-                name="password"
-                type="password"
-                className="form-control"
-              />
-            </div>
-            <div className="mb-3">
-              <label htmlFor="exampleInputPassword1" className="form-label">
-                Confrim Password
-              </label>
-              <input
-                value={credentials.Cpassword}
-                onChange={onChange}
-                id="cpassword"
-                name="cpassword"
-                type="password"
-                className="form-control"
-              />
-            </div>
-            <button type="submit" className="btn btn-danger">
-              Sign Up
-            </button>
-          </form>
+          </div>
         </div>
       </div>
     </>

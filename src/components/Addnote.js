@@ -115,7 +115,7 @@ const Addnote = () => {
               <div className="modal-footer">
                 <button
                   type="button"
-                  className="btn btn-secondary"
+                  className="btn btn-outline-dark"
                   data-bs-dismiss="modal"
                 >
                   Close
@@ -125,7 +125,7 @@ const Addnote = () => {
                     note.title.length < 3 || note.description.length < 5
                   }
                   type="button"
-                  className="btn btn-danger"
+                  className="btn btn-outline-success"
                   onClick={handleSubmit}
                 >
                   Save Note

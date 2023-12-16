@@ -158,7 +158,7 @@ const Home = () => {
               <button
                 ref={closeRef}
                 type="button"
-                className="btn btn-secondary"
+                className="btn btn-outline-dark"
                 data-bs-dismiss="modal"
               >
                 Close
@@ -168,7 +168,7 @@ const Home = () => {
                   note.etitle.length < 3 || note.edescription.length < 5
                 }
                 type="button"
-                className="btn btn-danger"
+                className="btn btn-outline-success"
                 onClick={handleSubmit}
               >
                 Update Note
