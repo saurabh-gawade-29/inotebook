@@ -50,7 +50,7 @@ const Navbar = () => {
               <li className="nav-item">
                 <Link
                   to="/"
-                  className={`nav-link fs-5
+                  className={`nav-link nav-link-f
                 ${location.pathname === "/" ? "active" : ""}`}
                   aria-current="page"
                 >
@@ -63,7 +63,7 @@ const Navbar = () => {
             <li className="nav-item">
               <Link
                 to="/about"
-                className={`nav-link fs-5
+                className={`nav-link nav-link-f
                 ${location.pathname === "/about" ? "active" : ""}`}
               >
                 About
