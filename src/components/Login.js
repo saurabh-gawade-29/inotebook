@@ -42,8 +42,20 @@ const Login = () => {
 
   return (
     <>
-      <div className="row justify-content-center">
-        <div className="col-12 col-sm 12 col-md-5 col-lg-6">
+      <div className="row">
+        <div className="col-12 col-sm 12 col-md-6 col-lg-6">
+          <div className="">
+            <div className="display-4 fw-bold">
+              Welcome back to CelestialScribe
+            </div>
+            <div className="my-2 fs-5">
+              Unlock the celestial wonders that await you! Log in to your
+              CelestialScribe account and embark on a journey where your
+              thoughts become constellations in the vast universe of creativity.
+            </div>
+          </div>
+        </div>
+        <div className="col-12 col-sm 12 col-md-6 col-lg-6">
           <div className="card gBorderRadius p-4 shadow">
             <div className="card-body">
               <h6 className="display-6">Let's Login</h6>
