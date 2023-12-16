@@ -46,7 +46,19 @@ const Signup = () => {
   return (
     <>
       <div className="row justify-content-center">
-        <div className="col-12 col-sm 12 col-md-10 col-lg-6">
+        <div className="col-12 col-sm 12 col-md-6 col-lg-6">
+          <div className="">
+            <div className="display-4 fw-bold">
+              Join CelestialScribe Illuminate Your Imagination
+            </div>
+            <div className="my-2 fs-5">
+              Unleash the power of creativity and embark on a celestial journey
+              with CelestialScribe. Sign up now to turn your ideas into
+              constellations in the cosmic canvas of note-taking.
+            </div>
+          </div>
+        </div>
+        <div className="col-12 col-sm 12 col-md-6 col-lg-6">
           <div className="card gBorderRadius p-4 shadow">
             <div className="card-body">
               <h6 className="display-6">Let's Create Your Account</h6>
