@@ -27,7 +27,7 @@ const Addnote = () => {
   return (
     <>
       <div className="d-flex justify-content-between">
-        <h3>Notes</h3>
+        <h3>Your Notations</h3>
         <button
           type="button"
           className="btn btn-danger"
@@ -47,7 +47,7 @@ const Addnote = () => {
             <div className="modal-content">
               <div className="modal-header">
                 <h1 className="modal-title fs-5" id="exampleModalLabel">
-                  Add The Details
+                  Add Note
                 </h1>
                 <button
                   type="button"
