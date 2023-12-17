@@ -99,7 +99,7 @@ const Login = () => {
       }
     } catch (error) {
       toast.error(error + "", {
-        position: "top-right",
+        position: "top-center",
         autoClose: 5000,
         hideProgressBar: false,
         closeOnClick: true,

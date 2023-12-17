@@ -6,8 +6,10 @@ import {
   serviceCallPost,
   serviceCallPut,
 } from "../../Helper/Service";
+import { toast } from "react-toastify";
 
 const NoteState = (props) => {
+  //! Basic Demonstration of use Context hook = about page -> useContext
   const about = {
     name: "CelestialScribe",
     title: "Your Cloud Notes",
@@ -19,57 +21,110 @@ const NoteState = (props) => {
     desc: "It's Totally Free to use",
   };
 
+  //! States
   const notesinit = [];
   const [data, setData] = useState(about);
   const [notes, setNotes] = useState(notesinit);
 
   //? get Note
   const getNotes = async () => {
-    //! Define the headers for the request
-    const url = `api/notes/fetchallnotes`;
-    const headers = {
-      "Content-Type": "application/json",
-      "auth-token": localStorage.getItem("token"),
-    };
-    const res = await serviceCallGet(url, headers);
-    console.log(res, "Res from getNotes");
-    setNotes(res.data);
+    try {
+      //! Define the headers for the request
+      const url = `api/notes/fetchallnotes`;
+      const headers = {
+        "Content-Type": "application/json",
+        "auth-token": localStorage.getItem("token"),
+      };
+      const res = await serviceCallGet(url, headers);
+      setNotes(res.data);
+    } catch (error) {
+      toast.error("Somthing Went Wrong", {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+    }
   };
 
   //? Add Note
   const addNote = async (title, description, tag) => {
-    //! Define the headers for the request
-    const headers = {
-      "Content-Type": "application/json",
-      "auth-token": localStorage.getItem("token"),
-    };
-    const url = `api/notes/addnote`;
-    const postData = { title, description, tag };
-    const res = await serviceCallPost(url, postData, headers);
-    console.log(res, "Add Note Res");
-    const addnote = res.data;
-    //! We use concat => It's return new Array
-    setNotes(notes.concat(addnote));
+    try {
+      //! Define the headers for the request
+      const headers = {
+        "Content-Type": "application/json",
+        "auth-token": localStorage.getItem("token"),
+      };
+      const url = `api/notes/addnote`;
+      const postData = { title, description, tag };
+      const res = await serviceCallPost(url, postData, headers);
+      const addnote = res.data;
+      //! We use concat => It's return new Array
+      setNotes(notes.concat(addnote));
+    } catch (error) {
+      toast.error("Somthing Went Wrong", {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+    }
   };
 
   //? Delete Note
   const deleteNote = async (id) => {
-    debugger;
-    //! Define the headers for the request
-    const url = `api/notes/deletenote/${id}`;
-    console.log("Deleting node with Id", id);
-    const headers = {
-      "Content-Type": "application/json",
-      "auth-token": localStorage.getItem("token"),
-    };
-    const res = await serviceCallDelete(url, headers);
-    console.log(res, "Res from deleteNotes");
-    if (res && res.data.Success) {
-      const newNotes = notes.filter((note) => note._id !== id);
-      setNotes(newNotes);
-      alert(res.data.Success);
-    } else {
-      alert("Somthing Went Wrong");
+    try {
+      //! Define the headers for the request
+      const url = `api/notes/deletenote/${id}`;
+      const headers = {
+        "Content-Type": "application/json",
+        "auth-token": localStorage.getItem("token"),
+      };
+      const res = await serviceCallDelete(url, headers);
+      if (res && res.data.Success) {
+        const newNotes = notes.filter((note) => note._id !== id);
+        setNotes(newNotes);
+        toast.success(res.data.Success, {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
+      } else {
+        toast.error("Somthing Went Wrong", {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
+      }
+    } catch (error) {
+      toast.error("Somthing Went Wrong", {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
     }
   };
 
@@ -83,7 +138,6 @@ const NoteState = (props) => {
     const postData = { title, description, tag };
     const url = `api/notes/updatenote/${id}`;
     const res = await serviceCallPut(url, postData, headers);
-    console.log(res, "Update res notes");
 
     //TODO: above code only change in backend but not updating in frontend
 
