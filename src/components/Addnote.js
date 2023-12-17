@@ -1,27 +1,102 @@
-import React, { useContext, useState } from "react";
+import React, { createRef, useContext, useState } from "react";
 import NoteContext from "../context/notes/NoteContext";
+import { toast } from "react-toastify";
 
 const Addnote = () => {
+  const titleRef = createRef(null);
+  const descriptionRef = createRef(null);
+  const tagRef = createRef(null);
+
   //! Context
   const context = useContext(NoteContext);
   const { addNote } = context;
 
-  //! UseState
+  //! States
   let initstate = {
     title: "",
     description: "",
-    tag: "",
+    tag: "Personal",
   };
   const [note, setNote] = useState(initstate);
 
+  //! OnChange Handler
   const onChange = (e) => {
     setNote({ ...note, [e.target.name]: e.target.value });
   };
 
+  //! Form Submit
   const handleSubmit = (e) => {
     e.preventDefault();
-    addNote(note.title, note.description, note.tag);
-    setNote(initstate);
+    try {
+      if (
+        note.title.trim() === "" ||
+        note.description.trim() === "" ||
+        note.tag.trim() === ""
+      ) {
+        toast.error("Please Enter Valid Details", {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
+        return;
+      }
+
+      if (note.title.length < 3) {
+        toast.error("Please Enter Valid Title", {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
+        return;
+      }
+
+      if (note.description.length < 5) {
+        toast.error("Please Enter Valid Description", {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
+        return;
+      }
+      addNote(note.title, note.description, note.tag);
+      setNote(initstate);
+      toast.success("Note Added Successfully", {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+    } catch (error) {
+      toast.error(error + "", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+    }
   };
 
   return (
@@ -65,6 +140,7 @@ const Addnote = () => {
                     Title
                   </label>
                   <input
+                    ref={titleRef}
                     value={note.title}
                     name="title"
                     onChange={onChange}
@@ -84,6 +160,7 @@ const Addnote = () => {
                     Desciption
                   </label>
                   <textarea
+                    ref={descriptionRef}
                     value={note.description}
                     name="description"
                     onChange={onChange}
@@ -103,6 +180,7 @@ const Addnote = () => {
                     Tag
                   </label>
                   <input
+                    ref={tagRef}
                     value={note.tag}
                     name="tag"
                     onChange={onChange}
@@ -121,9 +199,6 @@ const Addnote = () => {
                   Close
                 </button>
                 <button
-                  disabled={
-                    note.title.length < 3 || note.description.length < 5
-                  }
                   type="button"
                   className="btn btn-outline-success"
                   onClick={handleSubmit}

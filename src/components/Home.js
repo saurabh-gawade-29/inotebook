@@ -1,13 +1,42 @@
-import React, { useContext, useEffect, useRef, useState } from "react";
+import React, {
+  createRef,
+  useContext,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import Noteitem from "./Noteitem";
 import NoteContext from "../context/notes/NoteContext";
 import Addnote from "./Addnote";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const Home = () => {
+  //! Refs
+  const etitleRef = createRef(null);
+  const edescriptionRef = createRef(null);
+  const etagRef = createRef(null);
+
+  //! Open And Close Modal - Refs
+  const modalRef = useRef(null);
+  const closeRef = useRef(null);
+
+  //! We Can use Context instead of this state
+  let initstate = {
+    id: "",
+    etitle: "",
+    edescription: "",
+    etag: "",
+  };
+  const [note, setNote] = useState(initstate);
+
+  //! Context
   const noteContext = useContext(NoteContext);
   const { notes, getNotes, editNote } = noteContext;
+
+  //! Use Navigate hook redirection
   let navigate = useNavigate();
+
   //! Fetch All Notes
   useEffect(() => {
     if (localStorage.getItem("token")) {
@@ -18,22 +47,9 @@ const Home = () => {
     // eslint-disable-next-line
   }, []);
 
-  //! Open And Close Modal
-  const modalRef = useRef(null);
-  const closeRef = useRef(null);
-
-  //! We Can use Context instead of this state
-  const [note, setNote] = useState({
-    id: "",
-    etitle: "",
-    edescription: "",
-    etag: "",
-  });
-
   //! Open Modal
   const updateNote = (currentNote) => {
     debugger;
-    console.log(currentNote, "CurrentNote");
     modalRef.current.click();
     setNote({
       id: currentNote._id,
@@ -41,6 +57,9 @@ const Home = () => {
       edescription: currentNote.description,
       etag: currentNote.tag,
     });
+    // setTimeout(() => {
+    //   etitleRef && etitleRef.current.focus();
+    // }, 1000);
   };
 
   //! on Chnage Handler
@@ -51,11 +70,77 @@ const Home = () => {
 
   //! Submit Form
   const handleSubmit = (e) => {
-    //! Updating the note
-    console.log("Updated Note", note);
-    editNote(note.id, note.etitle, note.edescription, note.etag);
-    closeRef.current.click();
-    // addNote(note.title, note.description, note.tag);
+    try {
+      if (
+        note.etitle.trim() === "" ||
+        note.edescription.trim() === "" ||
+        note.etag.trim() === ""
+      ) {
+        toast.error("Please Enter Valid Details", {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
+        return;
+      }
+
+      if (note.etitle.length < 3) {
+        toast.error("Please Enter Valid Title", {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
+        return;
+      }
+
+      if (note.edescription.length < 5) {
+        toast.error("Please Enter Valid Description", {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
+        return;
+      }
+
+      editNote(note.id, note.etitle, note.edescription, note.etag);
+      closeRef.current.click();
+      toast.success("Note Updated Successfully", {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+    } catch (error) {
+      toast.error(error + "", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+    }
   };
 
   return (
@@ -66,7 +151,7 @@ const Home = () => {
       <div className="your-notes row">
         <div className="p">
           {notes.length === 0 &&
-            "No Notes To Display - Add new Note using above addNote Button"}
+            "No Notes To Display - Add new Note using above Add Note Button"}
         </div>
         {notes.map((note, i) => {
           return (
@@ -113,6 +198,7 @@ const Home = () => {
                   Title
                 </label>
                 <input
+                  ref={etitleRef}
                   value={note.etitle}
                   name="etitle"
                   onChange={onChange}
@@ -129,6 +215,7 @@ const Home = () => {
                   Desciption
                 </label>
                 <textarea
+                  ref={edescriptionRef}
                   value={note.edescription}
                   name="edescription"
                   onChange={onChange}
@@ -145,6 +232,7 @@ const Home = () => {
                   Tag
                 </label>
                 <input
+                  ref={etagRef}
                   value={note.etag}
                   name="etag"
                   onChange={onChange}
@@ -164,9 +252,6 @@ const Home = () => {
                 Close
               </button>
               <button
-                disabled={
-                  note.etitle.length < 3 || note.edescription.length < 5
-                }
                 type="button"
                 className="btn btn-outline-success"
                 onClick={handleSubmit}
