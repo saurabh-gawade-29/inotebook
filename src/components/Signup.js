@@ -46,7 +46,7 @@ const Signup = () => {
       ) {
         toast.error("Please Enter Valid Details", {
           position: "top-center",
-          autoClose: 5000,
+          autoClose: 1000,
           hideProgressBar: false,
           closeOnClick: true,
           pauseOnHover: true,
@@ -61,7 +61,7 @@ const Signup = () => {
       if (credentials.password.length < 5 || credentials.cpassword.length < 5) {
         toast.error("Your password is too short", {
           position: "top-center",
-          autoClose: 5000,
+          autoClose: 1000,
           hideProgressBar: false,
           closeOnClick: true,
           pauseOnHover: true,
@@ -76,7 +76,7 @@ const Signup = () => {
       if (credentials.password !== credentials.cpassword) {
         toast.error("Password did not match", {
           position: "top-center",
-          autoClose: 5000,
+          autoClose: 1000,
           hideProgressBar: false,
           closeOnClick: true,
           pauseOnHover: true,
@@ -102,7 +102,7 @@ const Signup = () => {
       if (response?.success) {
         toast.success("Account Created Successfully", {
           position: "top-center",
-          autoClose: 5000,
+          autoClose: 1000,
           hideProgressBar: false,
           closeOnClick: true,
           pauseOnHover: true,
@@ -114,7 +114,7 @@ const Signup = () => {
       } else {
         toast.success("Please Try Again", {
           position: "top-center",
-          autoClose: 5000,
+          autoClose: 1000,
           hideProgressBar: false,
           closeOnClick: true,
           pauseOnHover: true,
@@ -126,7 +126,7 @@ const Signup = () => {
     } catch (error) {
       toast.error(error + "", {
         position: "top-center",
-        autoClose: 5000,
+        autoClose: 1000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,

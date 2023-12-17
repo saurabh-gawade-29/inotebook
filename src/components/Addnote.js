@@ -35,7 +35,7 @@ const Addnote = () => {
       ) {
         toast.error("Please Enter Valid Details", {
           position: "top-center",
-          autoClose: 5000,
+          autoClose: 1000,
           hideProgressBar: false,
           closeOnClick: true,
           pauseOnHover: true,
@@ -49,7 +49,7 @@ const Addnote = () => {
       if (note.title.length < 3) {
         toast.error("Please Enter Valid Title", {
           position: "top-center",
-          autoClose: 5000,
+          autoClose: 1000,
           hideProgressBar: false,
           closeOnClick: true,
           pauseOnHover: true,
@@ -63,7 +63,7 @@ const Addnote = () => {
       if (note.description.length < 5) {
         toast.error("Please Enter Valid Description", {
           position: "top-center",
-          autoClose: 5000,
+          autoClose: 1000,
           hideProgressBar: false,
           closeOnClick: true,
           pauseOnHover: true,
@@ -77,7 +77,7 @@ const Addnote = () => {
       setNote(initstate);
       toast.success("Note Added Successfully", {
         position: "top-center",
-        autoClose: 5000,
+        autoClose: 1000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
@@ -88,7 +88,7 @@ const Addnote = () => {
     } catch (error) {
       toast.error(error + "", {
         position: "top-center",
-        autoClose: 5000,
+        autoClose: 1000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,

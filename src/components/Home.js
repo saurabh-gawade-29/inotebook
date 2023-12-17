@@ -78,7 +78,7 @@ const Home = () => {
       ) {
         toast.error("Please Enter Valid Details", {
           position: "top-center",
-          autoClose: 5000,
+          autoClose: 1000,
           hideProgressBar: false,
           closeOnClick: true,
           pauseOnHover: true,
@@ -92,7 +92,7 @@ const Home = () => {
       if (note.etitle.length < 3) {
         toast.error("Please Enter Valid Title", {
           position: "top-center",
-          autoClose: 5000,
+          autoClose: 1000,
           hideProgressBar: false,
           closeOnClick: true,
           pauseOnHover: true,
@@ -106,7 +106,7 @@ const Home = () => {
       if (note.edescription.length < 5) {
         toast.error("Please Enter Valid Description", {
           position: "top-center",
-          autoClose: 5000,
+          autoClose: 1000,
           hideProgressBar: false,
           closeOnClick: true,
           pauseOnHover: true,
@@ -121,7 +121,7 @@ const Home = () => {
       closeRef.current.click();
       toast.success("Note Updated Successfully", {
         position: "top-center",
-        autoClose: 5000,
+        autoClose: 1000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
@@ -132,7 +132,7 @@ const Home = () => {
     } catch (error) {
       toast.error(error + "", {
         position: "top-center",
-        autoClose: 5000,
+        autoClose: 1000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,

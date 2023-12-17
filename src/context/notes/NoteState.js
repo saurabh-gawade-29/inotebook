@@ -40,7 +40,7 @@ const NoteState = (props) => {
     } catch (error) {
       toast.error("Somthing Went Wrong", {
         position: "top-center",
-        autoClose: 5000,
+        autoClose: 1000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
@@ -68,7 +68,7 @@ const NoteState = (props) => {
     } catch (error) {
       toast.error("Somthing Went Wrong", {
         position: "top-center",
-        autoClose: 5000,
+        autoClose: 1000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
@@ -94,7 +94,7 @@ const NoteState = (props) => {
         setNotes(newNotes);
         toast.success(res.data.Success, {
           position: "top-center",
-          autoClose: 5000,
+          autoClose: 1000,
           hideProgressBar: false,
           closeOnClick: true,
           pauseOnHover: true,
@@ -105,7 +105,7 @@ const NoteState = (props) => {
       } else {
         toast.error("Somthing Went Wrong", {
           position: "top-center",
-          autoClose: 5000,
+          autoClose: 1000,
           hideProgressBar: false,
           closeOnClick: true,
           pauseOnHover: true,
@@ -117,7 +117,7 @@ const NoteState = (props) => {
     } catch (error) {
       toast.error("Somthing Went Wrong", {
         position: "top-center",
-        autoClose: 5000,
+        autoClose: 1000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
@@ -156,7 +156,7 @@ const NoteState = (props) => {
     } catch (error) {
       toast.error("Somthing Went Wrong", {
         position: "top-center",
-        autoClose: 5000,
+        autoClose: 1000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,

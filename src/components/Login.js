@@ -33,7 +33,7 @@ const Login = () => {
     if (credentials.email.trim() === "" || credentials.password.trim() === "") {
       toast.error("Please Enter Valid Credentials", {
         position: "top-center",
-        autoClose: 5000,
+        autoClose: 1000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
@@ -49,7 +49,7 @@ const Login = () => {
     if (credentials.password.length < 5) {
       toast.error("Your password is too short", {
         position: "top-center",
-        autoClose: 5000,
+        autoClose: 1000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
@@ -76,7 +76,7 @@ const Login = () => {
       if (response?.success) {
         toast.success("Welcome to CelestialScribe", {
           position: "top-center",
-          autoClose: 5000,
+          autoClose: 1000,
           hideProgressBar: false,
           closeOnClick: true,
           pauseOnHover: true,
@@ -89,7 +89,7 @@ const Login = () => {
       } else {
         toast.error("Please Enter Valid Credentials", {
           position: "top-center",
-          autoClose: 5000,
+          autoClose: 1000,
           hideProgressBar: false,
           closeOnClick: true,
           pauseOnHover: true,
@@ -101,7 +101,7 @@ const Login = () => {
     } catch (error) {
       toast.error(error + "", {
         position: "top-center",
-        autoClose: 5000,
+        autoClose: 1000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
@@ -185,7 +185,7 @@ export default Login;
 // if (credentials.email.length < 5) {
 //   toast.error("Please Enter Valid Email", {
 //     position: "top-center",
-//     autoClose: 5000,
+//     autoClose: 1000,
 //     hideProgressBar: false,
 //     closeOnClick: true,
 //     pauseOnHover: true,
