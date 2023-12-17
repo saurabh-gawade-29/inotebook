@@ -1,13 +1,27 @@
-import React, { useState } from "react";
+import React, { useState, createRef, useEffect } from "react";
 import { serviceCallPost } from "../Helper/Service";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+
 const Signup = () => {
+  //! Refs
+  const nameRef = createRef(null);
+  const emailRef = createRef(null);
+  const passwordRef = createRef(null);
+  const cpasswordRef = createRef(null);
+
   //! States
   const [credentials, setCredentials] = useState({
     name: "",
     email: "",
     password: "",
+    cpassword: "",
   });
+
+  //! UseEffect
+  useEffect(() => {
+    nameRef.current.focus();
+  }, []);
 
   //! Global Onchange
   const onChange = (e) => {
@@ -21,26 +35,104 @@ const Signup = () => {
   const handleSubmit = async (e) => {
     debugger;
     e.preventDefault();
-    const postData = {
-      name: credentials.name,
-      email: credentials.email,
-      password: credentials.password,
-    };
-    const headers = {
-      "Content-Type": "application/json",
-    };
-    const url = `api/auth/createuser`;
-    const res = await serviceCallPost(url, postData, headers);
-    //* you will get auth token here
-    console.log(res?.data, "You will get auth-token Here");
-    //* Need to strore that auth-token in localstorage and resuse by another api call in our context
-    let response = res?.data;
-    if (response?.success) {
-      // localStorage.setItem("token", res.data.authToken);
-      navigate("/login");
-      console.log(response.data, "login Success");
-    } else {
-      alert("Login Failed");
+    try {
+      //? Check for blanks
+      if (
+        credentials.name.trim() === "" ||
+        credentials.email.trim() === "" ||
+        credentials.password.trim() === "" ||
+        credentials.cpassword.trim() === ""
+      ) {
+        toast.error("Please Enter Valid Details", {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
+        return;
+      }
+
+      //? Check for password length
+      if (credentials.password.length < 5 || credentials.cpassword.length < 5) {
+        toast.error("Your password is too short", {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
+        passwordRef.current.focus();
+        return;
+      }
+
+      if (credentials.password !== credentials.cpassword) {
+        toast.error("Password did not match", {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
+        passwordRef.current.focus();
+        return;
+      }
+
+      const postData = {
+        name: credentials.name,
+        email: credentials.email,
+        password: credentials.password,
+      };
+      const headers = {
+        "Content-Type": "application/json",
+      };
+      const url = `api/auth/createuser`;
+      const res = await serviceCallPost(url, postData, headers);
+      let response = res?.data;
+      if (response?.success) {
+        toast.success("Account Created Successfully", {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
+        navigate("/login");
+      } else {
+        toast.success("Please Try Again", {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
+      }
+    } catch (error) {
+      toast.error(error + "", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
     }
   };
   return (
@@ -68,6 +160,7 @@ const Signup = () => {
                     Name
                   </label>
                   <input
+                    ref={nameRef}
                     value={credentials.name}
                     onChange={onChange}
                     id="name"
@@ -82,6 +175,7 @@ const Signup = () => {
                     Email address
                   </label>
                   <input
+                    ref={emailRef}
                     value={credentials.email}
                     onChange={onChange}
                     id="email"
@@ -99,6 +193,7 @@ const Signup = () => {
                     Password
                   </label>
                   <input
+                    ref={passwordRef}
                     value={credentials.password}
                     onChange={onChange}
                     id="password"
@@ -109,10 +204,11 @@ const Signup = () => {
                 </div>
                 <div className="mb-3">
                   <label htmlFor="exampleInputPassword1" className="form-label">
-                    Confrim Password
+                    Confirm Password
                   </label>
                   <input
-                    value={credentials.Cpassword}
+                    ref={cpasswordRef}
+                    value={credentials.cpassword}
                     onChange={onChange}
                     id="cpassword"
                     name="cpassword"

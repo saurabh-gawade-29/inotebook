@@ -13,10 +13,8 @@ const Login = () => {
 
   //! UseEffect
   useEffect(() => {
-    if (emailRef.current) {
-      emailRef.current.focus();
-    }
-  });
+    emailRef.current.focus();
+  }, []);
 
   //! Global Onchange
   const onChange = (e) => {
