@@ -1,10 +1,22 @@
-import React, { useState } from "react";
+import React, { createRef, useEffect, useState } from "react";
 import { serviceCallPost } from "../Helper/Service";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const Login = () => {
+  //! Refs
+  const emailRef = createRef(null);
+  const passwordRef = createRef(null);
+
   //! States
   const [credentials, setCredentials] = useState({ email: "", password: "" });
+
+  //! UseEffect
+  useEffect(() => {
+    if (emailRef.current) {
+      emailRef.current.focus();
+    }
+  });
 
   //! Global Onchange
   const onChange = (e) => {
@@ -18,25 +30,86 @@ const Login = () => {
   const handleSubmit = async (e) => {
     debugger;
     e.preventDefault();
-    const postData = {
-      email: credentials.email,
-      password: credentials.password,
-    };
-    const headers = {
-      "Content-Type": "application/json",
-    };
-    const url = `api/auth/login`;
-    const res = await serviceCallPost(url, postData, headers);
-    //* you will get auth token here
-    console.log(res?.data, "You will get auth-token Here");
-    //* Need to strore that auth-token in localstorage and resuse by another api call in our context
-    let response = res?.data;
-    if (response?.success) {
-      localStorage.setItem("token", res.data.authToken);
-      navigate("/");
-      console.log(response.data, "login Success");
-    } else {
-      alert("Login Failed");
+    //? Check for blanks
+    if (credentials.email.trim() === "" || credentials.password.trim() === "") {
+      toast.error("Please Enter Valid Credentials", {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+      emailRef.current.focus();
+      return;
+    }
+
+    //? Check for password length
+    if (credentials.password.length < 5) {
+      toast.error("Your password is too short", {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+      passwordRef.current.focus();
+      return;
+    }
+
+    try {
+      const postData = {
+        email: credentials.email,
+        password: credentials.password,
+      };
+      const headers = {
+        "Content-Type": "application/json",
+      };
+      const url = `api/auth/login`;
+      const res = await serviceCallPost(url, postData, headers);
+      //* Need to strore that auth-token in localstorage and resuse by another api call in our context
+      let response = await res?.data;
+      if (response?.success) {
+        toast.success("Welcome to CelestialScribe", {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
+        localStorage.setItem("token", res.data.authToken);
+        navigate("/");
+      } else {
+        toast.error("Please Enter Valid Credentials", {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
+      }
+    } catch (error) {
+      toast.error(error + "", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
     }
   };
 
@@ -65,6 +138,7 @@ const Login = () => {
                     Email address
                   </label>
                   <input
+                    ref={emailRef}
                     value={credentials.email}
                     onChange={onChange}
                     id="email"
@@ -82,6 +156,7 @@ const Login = () => {
                     Password
                   </label>
                   <input
+                    ref={passwordRef}
                     value={credentials.password}
                     onChange={onChange}
                     id="password"
@@ -103,3 +178,21 @@ const Login = () => {
 };
 
 export default Login;
+
+//? Check for Email - Currently using browser email Validations
+// Regular expression for basic email validation
+// const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+// const isValidEmail = emailRegex.test(credentials.email);
+// if (credentials.email.length < 5) {
+//   toast.error("Please Enter Valid Email", {
+//     position: "top-center",
+//     autoClose: 5000,
+//     hideProgressBar: false,
+//     closeOnClick: true,
+//     pauseOnHover: true,
+//     draggable: true,
+//     progress: undefined,
+//     theme: "light",
+//   });
+//   return;
+// }

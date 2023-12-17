@@ -7,6 +7,9 @@ import NoteState from "./context/notes/NoteState";
 import GLoader from "./components/GLoader";
 import Login from "./components/Login";
 import Signup from "./components/Signup";
+//! Toastify css import
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer } from "react-toastify";
 
 function App() {
   return (
@@ -21,6 +24,7 @@ function App() {
             <Route path="/signup" element={<Signup />} />
           </Routes>
         </div>
+        <ToastContainer />
         <GLoader />
       </NoteState>
     </>
