@@ -21,6 +21,7 @@ const Signup = () => {
   //! UseEffect
   useEffect(() => {
     nameRef.current.focus();
+    // eslint-disable-next-line
   }, []);
 
   //! Global Onchange

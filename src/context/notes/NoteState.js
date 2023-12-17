@@ -130,29 +130,41 @@ const NoteState = (props) => {
 
   //? Edit Note
   const editNote = async (id, title, description, tag) => {
-    //! Define the headers for the request
-    const headers = {
-      "Content-Type": "application/json",
-      "auth-token": localStorage.getItem("token"),
-    };
-    const postData = { title, description, tag };
-    const url = `api/notes/updatenote/${id}`;
-    const res = await serviceCallPut(url, postData, headers);
-
-    //TODO: above code only change in backend but not updating in frontend
-
-    //* Make Deep Copy of notes
-    let newNotes = JSON.parse(JSON.stringify(notes));
-    for (let i = 0; i < newNotes.length; i++) {
-      const element = newNotes[i];
-      if (element._id === id) {
-        newNotes[i].title = title;
-        newNotes[i].description = description;
-        newNotes[i].tag = tag;
-        break;
+    try {
+      //! Define the headers for the request
+      const headers = {
+        "Content-Type": "application/json",
+        "auth-token": localStorage.getItem("token"),
+      };
+      const postData = { title, description, tag };
+      const url = `api/notes/updatenote/${id}`;
+      const res = await serviceCallPut(url, postData, headers);
+      console.log(res, "Edit Note Res");
+      //TODO: above code only change in backend but not updating in frontend
+      //* Make Deep Copy of notes
+      let newNotes = JSON.parse(JSON.stringify(notes));
+      for (let i = 0; i < newNotes.length; i++) {
+        const element = newNotes[i];
+        if (element._id === id) {
+          newNotes[i].title = title;
+          newNotes[i].description = description;
+          newNotes[i].tag = tag;
+          break;
+        }
       }
+      setNotes(newNotes);
+    } catch (error) {
+      toast.error("Somthing Went Wrong", {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
     }
-    setNotes(newNotes);
   };
 
   const update = () => {

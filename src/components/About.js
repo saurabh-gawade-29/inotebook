@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useContext } from "react";
 import NoteContext from "../context/notes/NoteContext";
 
@@ -10,7 +10,7 @@ const About = () => {
   const desc = state.data.desc;
 
   //! You can Update value using this useEffect
-  //TODO: It's Just a small demonstration of updating a state using use context
+  //TODO: It's Just a small demonstration of updating a state using use context and import useEffect
   // useEffect(() => {
   //   state.update();
   // });
