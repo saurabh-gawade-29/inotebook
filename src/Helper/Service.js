@@ -2,7 +2,7 @@ import axios from "axios";
 import { trackPromise } from "react-promise-tracker";
 
 //TODO: Change this host as per your needs
-const host = "http://localhost:5000/";
+const host = "https://inotebookbackend-ec2h.onrender.com/";
 
 //? POST
 export async function serviceCallPost(url, postData, headers) {
