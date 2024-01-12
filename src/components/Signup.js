@@ -111,7 +111,19 @@ const Signup = () => {
           theme: "light",
         });
         navigate("/login");
-      } else {
+      }else if(response?.success === false) {
+        toast.success(response.error.toString(), {
+          position: "top-center",
+          autoClose: 1000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
+      }
+       else {
         toast.success("Please Try Again", {
           position: "top-center",
           autoClose: 1000,
